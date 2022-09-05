@@ -1,0 +1,88 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MaterialApp(
+    home: MyApp(),
+  ));
+}
+
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("Login"),
+          backgroundColor: Colors.redAccent,
+        ),
+      TextEditingController emailController = new TextEditingController();
+      
+        body: Container(
+          height: 200,
+//             alignment: Alignment.center,
+          padding: EdgeInsets.all(20),
+          child: Column(
+            children: [
+
+
+              TextField(
+              TextEditingController emailController = new TextEditingController();
+                controller: emailController,
+                autofillHints: [AutofillHints.email], //email suggetions
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                    hintText: "Enter Username Here", labelText: "Email"),
+              ), //TextField
+              TextField(
+                autofillHints: [AutofillHints.password],
+                obscureText: true,
+                decoration: InputDecoration(
+                    hintText: "Enter Password Here", labelText: "Password"),
+              ), //TextField
+
+              ElevatedButton(
+                child: Text('Log in!'),
+                onPressed: () {
+                  print('presed');
+                },
+              ), //ElevatedButton
+              
+               ElevatedButton(
+        // When the user presses the button, show an alert dialog containing
+        // the text that the user has entered into the text field.
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                // Retrieve the text the that user has entered by using the
+                // TextEditingController.
+                
+//                 Text(yourControllerName.text.toString(), // this will convert your controller to String)
+               
+                content: Text(emailController.text.toString()),
+              );
+            },
+          );
+        },
+//         tooltip: 'Show me the value!',
+        child: const Icon(Icons.text_fields),
+      ),
+              
+//       floatingActionButton: FloatingActionButton.extended(
+//         onPressed: () {},
+//         icon: Icon(Icons.save),
+//         label: Text("Save"),
+//       ),
+//    ),
+            ], //children
+          ), //child
+
+          //FloatingWidgetButton
+        )); //Container
+  }
+}
