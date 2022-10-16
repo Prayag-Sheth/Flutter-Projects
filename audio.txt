@@ -1,0 +1,68 @@
+// ignore_for_file: prefer_const_constructors, unnecessary_string_interpolations, avoid_print, unused_import
+
+import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: MyScreen(),
+    );
+  }
+}
+
+class MyScreen extends StatefulWidget {
+  const MyScreen({Key? key}) : super(key: key);
+  @override
+  State<MyScreen> createState() => _MyScreenState();
+}
+
+class _MyScreenState extends State<MyScreen> {
+  AudioPlayer audioPlayer = AudioPlayer();
+  String myAudioPath = 'audio/mysong.mp3';
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("My App",
+              style: TextStyle(
+                fontFamily: "Poppins",
+              )),
+          backgroundColor: Colors.blueGrey,
+        ),
+        body: Center(
+          child: Column(children: <Widget>[
+            ElevatedButton(
+                onPressed: () async {
+                  await audioPlayer.play(AssetSource(myAudioPath));
+                  print("Play");
+                },
+                child: Text("Play")),
+            ElevatedButton(
+                onPressed: () async {
+                  await audioPlayer.pause();
+                  print("Pause");
+                },
+                child: Text("Pause")),
+            ElevatedButton(
+                onPressed: () async {
+                  await audioPlayer.resume();
+                  print("Resume");
+                },
+                child: Text("Resume")),
+            ElevatedButton(
+                onPressed: () async {
+                  await audioPlayer.stop();
+                  print("Stop");
+                },
+                child: Text("Stop")),
+          ]),
+        ));
+  }
+}

@@ -1,0 +1,82 @@
+//Prime number checker using elevated button
+
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return MyScreen();
+  }
+}
+
+class MyScreen extends StatefulWidget {
+  const MyScreen({Key? key}) : super(key: key);
+  @override
+  State<MyScreen> createState() => _MyScreenState();
+}
+
+class _MyScreenState extends State<MyScreen> {
+  String text1 = "";
+  String text2 = "";
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        theme: ThemeData(primarySwatch: Colors.brown),
+        home: Scaffold(
+          appBar: AppBar(
+            title: Text("My App"),
+          ),
+          body: Column(children: [
+            const Text("Addition"),
+            TextField(
+              onChanged: (val1) {
+                _updateValue1(val1);
+              },
+            ),
+            Text(text1),
+            ElevatedButton(
+                onPressed: () {
+                  _checkPrime();
+                },
+                child: Text("Check")),
+          ]),
+        ));
+    //);
+  }
+
+  _updateValue1(String val1) {
+    setState(() {
+      text2 = val1;
+    });
+  }
+
+  _checkPrime() {
+    int val2 = int.parse(text2);
+    int flag = 0;
+    int i = 0;
+    if (val2 == 0 || val2 == 1) {
+      flag = 1;
+    }
+
+    for (i = 2; i <= val2 / 2; i++) {
+      if (val2 % i == 0) {
+        flag = 1;
+        break;
+      }
+    }
+    if (flag == 0) {
+      setState(() {
+        text1 = "Prime number";
+      });
+    } else {
+      setState(() {
+        text1 = "Not a prime number";
+      });
+    }
+  }
+}
